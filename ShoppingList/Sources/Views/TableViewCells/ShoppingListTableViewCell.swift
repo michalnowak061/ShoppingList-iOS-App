@@ -16,7 +16,7 @@ class ShoppingListTableViewCell: UITableViewCell {
     }
   }
 
-  public var taskName: String? {
+  public var itemToBuyName: String? {
     get {
       return self.label.text
     }
@@ -55,9 +55,9 @@ class ShoppingListTableViewCell: UITableViewCell {
     self.checkbox.checkboxLine = CheckboxLineStyle(checkBoxHeight: self.frame.height * 0.5)
 
     self.checkbox.checkBoxColor = CheckBoxColor(
-      activeColor: #colorLiteral(red: 0.7128377083, green: 0.307490105, blue: 0.9686274529, alpha: 1),
+      activeColor: #colorLiteral(red: 0.9686274529, green: 0.3342734486, blue: 0.497093107, alpha: 1),
       inactiveColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-      inactiveBorderColor: #colorLiteral(red: 0.7128377083, green: 0.307490105, blue: 0.9686274529, alpha: 1),
+      inactiveBorderColor: #colorLiteral(red: 0.9686274529, green: 0.3342734486, blue: 0.497093107, alpha: 1),
       checkMarkColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
 
     self.checkbox.delegate = self

@@ -1,15 +1,48 @@
 import UIKit
 
 class ShoppingListsViewController: UIViewController {
+  // MARK: - Private var
+  private var dataManager: DataManager!
+
+  private var selectedIndex: Int!
+
   // MARK: - IBOutlet's
   @IBOutlet weak var addButton: UIButton!
 
   @IBOutlet weak var tableView: UITableView!
 
   // MARK: - Override function's
+  init() {
+    super.init(nibName: nil, bundle: nil)
+    self.dataManager = DataManager()
+  }
+
+  convenience init(dataManager: DataManager) {
+    self.init()
+    self.dataManager = dataManager
+  }
+
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    self.dataManager = DataManager()
+  }
+
   override func loadView() {
     super.loadView()
     self.setup()
+  }
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.updateUI()
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "showShoppingListVC" {
+      if let viewController = segue.destination as? ShoppingListViewController {
+        viewController.setRequiredData(dataManager: self.dataManager, selectedIndex: self.selectedIndex)
+      }
+    }
   }
 
   // MARK: - Private function's
@@ -32,6 +65,12 @@ class ShoppingListsViewController: UIViewController {
     self.tableView.dataSource = self
   }
 
+  private func updateUI() {
+    self.dataManager.read {
+      self.tableView.reloadData()
+    }
+  }
+
   private func showAddListAlert() {
     let alert = UIAlertController(
       title: "Add shopping list",
@@ -46,7 +85,16 @@ class ShoppingListsViewController: UIViewController {
 
     alert.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
       if let name = alert.textFields?.first?.text {
-        print("Shopping list name: \(name)")
+        let newShoppingList = ShoppingList()
+        newShoppingList.name = name
+
+        do {
+          try self.dataManager.create(shoppingList: newShoppingList) {
+            self.updateUI()
+          }
+        } catch {
+          fatalError(error.localizedDescription)
+        }
       }
     })
 
@@ -61,7 +109,7 @@ class ShoppingListsViewController: UIViewController {
 
 extension ShoppingListsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    10
+    self.dataManager.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,7 +120,9 @@ extension ShoppingListsViewController: UITableViewDelegate, UITableViewDataSourc
       fatalError("ShoppingListsTableViewCell identifier not found")
     }
 
-    cell.nameLabel.text = "Shopping list name"
+    let list = self.dataManager.entities[indexPath.row]
+    cell.nameLabel.text = list.name
+    cell.selectionStyle = .none
 
     return cell
   }
@@ -81,8 +131,20 @@ extension ShoppingListsViewController: UITableViewDelegate, UITableViewDataSourc
     self.view.frame.height * 0.08
   }
 
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    self.selectedIndex = indexPath.row
+    self.performSegue(withIdentifier: "showShoppingListVC", sender: self)
+  }
+
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let action = UIContextualAction(style: .destructive, title: "Delete") { _, _, _  in
+    let action = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+      do {
+        try self.dataManager.delete(atIndex: indexPath.row) {
+          self.updateUI()
+        }
+      } catch {
+        fatalError(error.localizedDescription)
+      }
     }
 
     return UISwipeActionsConfiguration(actions: [action])

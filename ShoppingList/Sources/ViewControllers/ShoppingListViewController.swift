@@ -1,10 +1,21 @@
 import UIKit
 
 class ShoppingListViewController: UIViewController {
+  // MARK: - Private var
+  private var dataManager: DataManager!
+
+  private var selectedIndex: Int!
+
+  private var selectedShoppingList: ShoppingList {
+    self.dataManager.entities[self.selectedIndex]
+  }
+
   // MARK: - IBOutlet's
   @IBOutlet weak var addButton: UIButton!
 
   @IBOutlet weak var tableView: UITableView!
+
+  @IBOutlet weak var titleLabel: UILabel!
 
   // MARK: - Override function's
   override func loadView() {
@@ -12,10 +23,27 @@ class ShoppingListViewController: UIViewController {
     self.setup()
   }
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.updateUI()
+  }
+
+  // MARK: - Function's
+  func setRequiredData(dataManager: DataManager, selectedIndex: Int) {
+    self.dataManager = dataManager
+    self.selectedIndex = selectedIndex
+  }
+
   // MARK: - Private function's
   private func setup() {
+    self.setupTitleLabel()
     self.addButtonSetup()
     self.tableViewSetup()
+  }
+
+  private func setupTitleLabel() {
+    let shoppingList = self.dataManager.entities[self.selectedIndex]
+    self.titleLabel.text = shoppingList.name
   }
 
   private func addButtonSetup() {
@@ -33,6 +61,12 @@ class ShoppingListViewController: UIViewController {
     self.tableView.dataSource = self
   }
 
+  private func updateUI() {
+    self.dataManager.read {
+      self.tableView.reloadData()
+    }
+  }
+
   private func showAddItemToBuyAlert() {
     let alert = UIAlertController(
       title: "Add item to buy",
@@ -47,13 +81,26 @@ class ShoppingListViewController: UIViewController {
 
     alert.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
       if let name = alert.textFields?.first?.text {
-        print("Item to buy name: \(name)")
+        do {
+          try self.dataManager.update(closure: {
+            let newItemToBuy = ItemToBuy()
+            newItemToBuy.name = name
+
+            let list = self.selectedShoppingList
+            list.items.append(newItemToBuy)
+          }, completion: {
+            self.updateUI()
+          })
+        } catch {
+          fatalError(error.localizedDescription)
+        }
       }
     })
 
     self.present(alert, animated: true)
   }
 
+  // MARK: - IBAction's
   @IBAction func addButtonPressed(_ sender: UIButton) {
     self.showAddItemToBuyAlert()
   }
@@ -61,17 +108,19 @@ class ShoppingListViewController: UIViewController {
 
 extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    10
+    self.selectedShoppingList.items.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard
-      let cell = self.tableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell") as? ShoppingListTableViewCell
+      let cell = self.tableView.dequeueReusableCell(
+        withIdentifier: "ShoppingListTableViewCell") as? ShoppingListTableViewCell
     else {
-      fatalError("TaskTableViewCell identifier not found")
+      fatalError("ShoppingListTableViewCell identifier not found")
     }
 
-    cell.taskName = "Item to buy name"
+    let item = self.selectedShoppingList.items[indexPath.row]
+    cell.itemToBuyName = item.name
 
     return cell
   }
@@ -82,6 +131,16 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
 
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let action = UIContextualAction(style: .destructive, title: "Delete") { _, _, _  in
+      do {
+        try self.dataManager.update(closure: {
+          let list = self.selectedShoppingList
+          list.items.remove(at: indexPath.row)
+        }, completion: {
+          self.updateUI()
+        })
+      } catch {
+        fatalError(error.localizedDescription)
+      }
     }
 
     return UISwipeActionsConfiguration(actions: [action])

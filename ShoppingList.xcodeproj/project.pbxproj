@@ -29,6 +29,11 @@
 		9D8558CF2699B85F00828F5C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8558CE2699B85F00828F5C /* StringExtensions.swift */; };
 		9D8558D12699C2C900828F5C /* ShoppingListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8558D02699C2C900828F5C /* ShoppingListsViewController.swift */; };
 		9D8558D32699C7F200828F5C /* ShoppingListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8558D22699C7F200828F5C /* ShoppingListsTableViewCell.swift */; };
+		9D8558EA2699EF3400828F5C /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8558E92699EF3400828F5C /* DataManagerTests.swift */; };
+		9D8558F2269A554F00828F5C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8558F1269A554F00828F5C /* DataManager.swift */; };
+		9D8558F4269A77FB00828F5C /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8558F3269A77FB00828F5C /* ShoppingList.swift */; };
+		9D8558F8269B0AB500828F5C /* RealmMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8558F7269B0AB500828F5C /* RealmMock.swift */; };
+		9DE0DCA7269B0CCC00D869C9 /* ItemToBuy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE0DCA6269B0CCC00D869C9 /* ItemToBuy.swift */; };
 		9DF9B8A82698F8DA00D1CAF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9B8A72698F8DA00D1CAF1 /* AppDelegate.swift */; };
 		9DF9B8AA2698F8DA00D1CAF1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9B8A92698F8DA00D1CAF1 /* SceneDelegate.swift */; };
 		9DF9B8AF2698F8DA00D1CAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DF9B8AD2698F8DA00D1CAF1 /* Main.storyboard */; };
@@ -56,6 +61,12 @@
 		9D8558CE2699B85F00828F5C /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		9D8558D02699C2C900828F5C /* ShoppingListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListsViewController.swift; sourceTree = "<group>"; };
 		9D8558D22699C7F200828F5C /* ShoppingListsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListsTableViewCell.swift; sourceTree = "<group>"; };
+		9D8558E82699EF3400828F5C /* ShoppingListTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShoppingListTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		9D8558E92699EF3400828F5C /* DataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
+		9D8558F1269A554F00828F5C /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		9D8558F3269A77FB00828F5C /* ShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
+		9D8558F7269B0AB500828F5C /* RealmMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMock.swift; sourceTree = "<group>"; };
+		9DE0DCA6269B0CCC00D869C9 /* ItemToBuy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToBuy.swift; sourceTree = "<group>"; };
 		9DF9B8A42698F8DA00D1CAF1 /* ShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF9B8A72698F8DA00D1CAF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DF9B8A92698F8DA00D1CAF1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +142,7 @@
 		9D386D5326990DEF00173D91 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				9D8558E12699E8A500828F5C /* Model tests */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -139,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				9DF9B8C02698F8DF00D1CAF1 /* Info.plist */,
+				9D8558E82699EF3400828F5C /* ShoppingListTests-Bridging-Header.h */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -162,6 +175,7 @@
 		9D8558C32699B30800828F5C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9D8558F0269A553000828F5C /* DataManager */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,6 +204,57 @@
 				9D8558C22699B1A400828F5C /* Delegates */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		9D8558DA2699E79100828F5C /* Data types */ = {
+			isa = PBXGroup;
+			children = (
+				9D8558F3269A77FB00828F5C /* ShoppingList.swift */,
+				9DE0DCA6269B0CCC00D869C9 /* ItemToBuy.swift */,
+			);
+			path = "Data types";
+			sourceTree = "<group>";
+		};
+		9D8558E12699E8A500828F5C /* Model tests */ = {
+			isa = PBXGroup;
+			children = (
+				9D8558E22699E8B200828F5C /* DataManager tests */,
+			);
+			path = "Model tests";
+			sourceTree = "<group>";
+		};
+		9D8558E22699E8B200828F5C /* DataManager tests */ = {
+			isa = PBXGroup;
+			children = (
+				9D8558F9269B0AFC00828F5C /* Tests */,
+				9D8558F6269B0AA400828F5C /* Mocks */,
+			);
+			path = "DataManager tests";
+			sourceTree = "<group>";
+		};
+		9D8558F0269A553000828F5C /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				9D8558F1269A554F00828F5C /* DataManager.swift */,
+				9D8558DA2699E79100828F5C /* Data types */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		9D8558F6269B0AA400828F5C /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				9D8558F7269B0AB500828F5C /* RealmMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		9D8558F9269B0AFC00828F5C /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9D8558E92699EF3400828F5C /* DataManagerTests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		9DF9B89B2698F8DA00D1CAF1 = {
@@ -317,6 +382,7 @@
 					};
 					9DF9B8B92698F8DF00D1CAF1 = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1250;
 						TestTargetID = 9DF9B8A32698F8DA00D1CAF1;
 					};
 					9DF9B8DA2699041700D1CAF1 = {
@@ -473,9 +539,12 @@
 				9D8558CF2699B85F00828F5C /* StringExtensions.swift in Sources */,
 				9D8558D12699C2C900828F5C /* ShoppingListsViewController.swift in Sources */,
 				9DF9B8A82698F8DA00D1CAF1 /* AppDelegate.swift in Sources */,
+				9D8558F2269A554F00828F5C /* DataManager.swift in Sources */,
 				9D8558BE2699B18600828F5C /* ShoppingListTableViewCell.swift in Sources */,
 				9DF9B8AA2698F8DA00D1CAF1 /* SceneDelegate.swift in Sources */,
 				9D8558D32699C7F200828F5C /* ShoppingListsTableViewCell.swift in Sources */,
+				9D8558F4269A77FB00828F5C /* ShoppingList.swift in Sources */,
+				9DE0DCA7269B0CCC00D869C9 /* ItemToBuy.swift in Sources */,
 				9D8558BA2699B17100828F5C /* ShoppingListViewController.swift in Sources */,
 				9D8558C12699B19F00828F5C /* ShoppingListTableViewCellDelegate.swift in Sources */,
 			);
@@ -485,6 +554,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D8558EA2699EF3400828F5C /* DataManagerTests.swift in Sources */,
+				9D8558F8269B0AB500828F5C /* RealmMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,6 +751,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2R2M3KJN7D;
 				INFOPLIST_FILE = ShoppingListTests/Resources/Info.plist;
@@ -691,6 +763,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShoppingListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingListTests/Resources/ShoppingListTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShoppingList.app/ShoppingList";
@@ -703,6 +777,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2R2M3KJN7D;
 				INFOPLIST_FILE = ShoppingListTests/Resources/Info.plist;
@@ -714,6 +789,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShoppingListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingListTests/Resources/ShoppingListTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShoppingList.app/ShoppingList";

@@ -54,7 +54,7 @@
                                         <rect key="frame" x="0.0" y="50.5" width="382" height="741.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskTableViewCell" rowHeight="87" id="dTS-mR-0c5" customClass="ShoppingListTableViewCell" customModule="ShoppingList" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ShoppingListTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShoppingListTableViewCell" rowHeight="87" id="dTS-mR-0c5" customClass="ShoppingListTableViewCell" customModule="ShoppingList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="24.5" width="382" height="87"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dTS-mR-0c5" id="0Np-kb-cOb">
@@ -110,6 +110,7 @@
                     <connections>
                         <outlet property="addButton" destination="KGi-cL-ezo" id="kkZ-2l-CUS"/>
                         <outlet property="tableView" destination="zDy-mj-Dr0" id="xrS-cj-7co"/>
+                        <outlet property="titleLabel" destination="xjP-tL-gjW" id="zZe-nv-VKq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -188,7 +189,6 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="nameLabel" destination="aKg-VE-laH" id="QHo-Sb-iTh"/>
-                                                    <segue destination="BYZ-38-t0r" kind="show" id="2J3-TI-oo6"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -210,6 +210,7 @@
                     <connections>
                         <outlet property="addButton" destination="QX8-VT-1FP" id="c7r-HF-pI4"/>
                         <outlet property="tableView" destination="7Xk-6m-0v2" id="edM-ha-fhO"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="showShoppingListVC" id="XA8-HD-WHE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GiW-Ne-tMe" sceneMemberID="firstResponder"/>
