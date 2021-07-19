@@ -10,6 +10,8 @@ class ShoppingListsViewController: UIViewController {
   // MARK: - Variable's
   var floatButton: JJFloatingActionButton!
 
+  var searchbar: UISearchBar!
+
   // MARK: - IBOutlet's
   @IBOutlet weak var tableView: UITableView!
 
@@ -51,6 +53,7 @@ class ShoppingListsViewController: UIViewController {
   private func setup() {
     self.floatButtonSetup()
     self.tableViewSetup()
+    self.searchBarSetup()
   }
 
   private func floatButtonSetup() {
@@ -68,7 +71,7 @@ class ShoppingListsViewController: UIViewController {
     self.floatButton.addItem(
       title: "Search list",
       image: (UIImage(systemName: "magnifyingglass") ?? UIImage())?.withRenderingMode(.alwaysTemplate)) { _ in
-
+      self.showSearchBar()
       self.floatButton.close()
     }
 
@@ -91,6 +94,41 @@ class ShoppingListsViewController: UIViewController {
 
     self.tableView.delegate = self
     self.tableView.dataSource = self
+  }
+
+  private func searchBarSetup() {
+    self.searchbar = UISearchBar()
+    self.searchbar.translatesAutoresizingMaskIntoConstraints = false
+    self.searchbar.alpha = 0
+
+    self.view.addSubview(self.searchbar)
+
+    // constraints
+    let constraints = [
+      self.searchbar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+      self.searchbar.bottomAnchor.constraint(equalTo: self.tableView.topAnchor),
+      self.searchbar.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+      self.searchbar.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1)
+    ]
+    NSLayoutConstraint.activate(constraints)
+  }
+
+  private func showSearchBar() {
+    UIView.animate(withDuration: 1) {
+      self.searchbar.alpha = 1.0
+    }
+    UIView.animate(withDuration: 0.5) {
+      self.tableView.transform = CGAffineTransform(translationX: 0, y: self.searchbar.frame.height)
+      self.searchbar.transform = CGAffineTransform(translationX: 0, y: self.searchbar.frame.height)
+    }
+  }
+
+  private func hideSearchBar() {
+    UIView.animate(withDuration: 0.5) {
+      self.tableView.transform = CGAffineTransform(translationX: 0, y: 0)
+      self.searchbar.transform = CGAffineTransform(translationX: 0, y: 0)
+      self.searchbar.alpha = 0
+    }
   }
 
   private func updateUI() {
@@ -155,6 +193,7 @@ extension ShoppingListsViewController: UITableViewDelegate, UITableViewDataSourc
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    self.hideSearchBar()
     self.selectedIndex = indexPath.row
     self.performSegue(withIdentifier: "showShoppingListVC", sender: self)
   }
