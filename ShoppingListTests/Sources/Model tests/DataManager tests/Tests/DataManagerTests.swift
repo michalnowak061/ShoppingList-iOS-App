@@ -1,10 +1,3 @@
-//
-//  DataManagerTests.swift
-//  ShoppingListTests
-//
-//  Created by Michał Nowak on 10/07/2021.
-//
-
 import XCTest
 import RealmSwift
 @testable import ShoppingList

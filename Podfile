@@ -11,6 +11,7 @@ target 'ShoppingList' do
   # Pods for ShoppingList
   pod 'MBCheckboxButton'
   pod 'RealmSwift'
+  pod 'JJFloatingActionButton'
 
   target 'ShoppingListTests' do
     inherit! :search_paths

@@ -128,37 +128,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6sX-Ww-CG0">
                                 <rect key="frame" x="16" y="44" width="382" height="818"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="DSS-by-yGl">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="50.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shopping lists" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="Y7d-Sf-qJl">
-                                                <rect key="frame" x="0.0" y="0.0" width="311.5" height="50.5"/>
-                                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="50"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QX8-VT-1FP">
-                                                <rect key="frame" x="331.5" y="0.0" width="50.5" height="50.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="QX8-VT-1FP" secondAttribute="height" multiplier="1:1" id="Eh4-MA-ktj"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
-                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                                <state key="normal">
-                                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="addButtonPressed:" destination="pp8-gx-PEX" eventType="touchUpInside" id="MUT-Ws-ODO"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="DSS-by-yGl" secondAttribute="height" multiplier="380:50" id="JTH-Vh-vsG"/>
-                                        </constraints>
-                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shopping lists" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="Y7d-Sf-qJl">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="65"/>
+                                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="50"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Xk-6m-0v2">
-                                        <rect key="frame" x="0.0" y="50.5" width="382" height="767.5"/>
+                                        <rect key="frame" x="0.0" y="65" width="382" height="753"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ShoppingListsTableViewCell" rowHeight="87" id="SEe-e2-Rl3" customClass="ShoppingListsTableViewCell" customModule="ShoppingList" customModuleProvider="target">
@@ -208,7 +185,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nxs-yN-Jj4"/>
                     <connections>
-                        <outlet property="addButton" destination="QX8-VT-1FP" id="c7r-HF-pI4"/>
                         <outlet property="tableView" destination="7Xk-6m-0v2" id="edM-ha-fhO"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="showShoppingListVC" id="XA8-HD-WHE"/>
                     </connections>

@@ -1,14 +1,16 @@
 import UIKit
+import JJFloatingActionButton
 
 class ShoppingListsViewController: UIViewController {
-  // MARK: - Private var
+  // MARK: - Private variable's
   private var dataManager: DataManager!
 
   private var selectedIndex: Int!
 
-  // MARK: - IBOutlet's
-  @IBOutlet weak var addButton: UIButton!
+  // MARK: - Variable's
+  var floatButton: JJFloatingActionButton!
 
+  // MARK: - IBOutlet's
   @IBOutlet weak var tableView: UITableView!
 
   // MARK: - Override function's
@@ -47,14 +49,40 @@ class ShoppingListsViewController: UIViewController {
 
   // MARK: - Private function's
   private func setup() {
-    self.addButtonSetup()
+    self.floatButtonSetup()
     self.tableViewSetup()
   }
 
-  private func addButtonSetup() {
-    self.addButton.layer.cornerRadius = self.addButton.frame.width / 2
-    self.addButton.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.3342734486, blue: 0.497093107, alpha: 1)
-    self.addButton.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+  private func floatButtonSetup() {
+    self.floatButton = JJFloatingActionButton()
+    self.floatButton.buttonColor = #colorLiteral(red: 0.9686274529, green: 0.3342734486, blue: 0.497093107, alpha: 1)
+    self.floatButton.translatesAutoresizingMaskIntoConstraints = false
+
+    self.floatButton.addItem(
+      title: "Add new list",
+      image: (UIImage(systemName: "plus") ?? UIImage())?.withRenderingMode(.alwaysTemplate)) { _ in
+      self.showAddListAlert()
+      self.floatButton.close()
+    }
+
+    self.floatButton.addItem(
+      title: "Search list",
+      image: (UIImage(systemName: "magnifyingglass") ?? UIImage())?.withRenderingMode(.alwaysTemplate)) { _ in
+
+      self.floatButton.close()
+    }
+
+    self.view.addSubview(self.floatButton)
+
+    // constraints
+    let offset = self.view.frame.width * 0.1
+    let constraints = [
+      self.floatButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -offset),
+      self.floatButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -offset),
+      self.floatButton.widthAnchor.constraint(equalToConstant: self.view.frame.width * 0.18),
+      self.floatButton.heightAnchor.constraint(equalToConstant: self.view.frame.width * 0.18)
+    ]
+    NSLayoutConstraint.activate(constraints)
   }
 
   private func tableViewSetup() {
@@ -99,11 +127,6 @@ class ShoppingListsViewController: UIViewController {
     })
 
     self.present(alert, animated: true)
-  }
-
-  // MARK: - IBAction's
-  @IBAction func addButtonPressed(_ sender: UIButton) {
-    self.showAddListAlert()
   }
 }
 
