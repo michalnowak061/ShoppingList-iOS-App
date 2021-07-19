@@ -120,7 +120,10 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
     }
 
     let item = self.selectedShoppingList.items[indexPath.row]
+    cell.id = indexPath.row
     cell.itemToBuyName = item.name
+    cell.isChecked = item.isChecked
+    cell.delegate = self
 
     return cell
   }
@@ -148,9 +151,31 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
-  func didSelect(taskTableViewCell: ShoppingListTableViewCell, didSelect: Bool) {
+  func didSelect(taskTableViewCell: ShoppingListTableViewCell) {
+    guard let index = taskTableViewCell.id else {
+      return
+    }
+    do {
+      try self.dataManager.update {
+        let list = self.selectedShoppingList
+        list.items[index].isChecked = true
+      }
+    } catch {
+      fatalError(error.localizedDescription)
+    }
   }
 
-  func didDeselect(taskTableViewCell: ShoppingListTableViewCell, didDeselect: Bool) {
+  func didDeselect(taskTableViewCell: ShoppingListTableViewCell) {
+    guard let index = taskTableViewCell.id else {
+      return
+    }
+    do {
+      try self.dataManager.update {
+        let list = self.selectedShoppingList
+        list.items[index].isChecked = false
+      }
+    } catch {
+      fatalError(error.localizedDescription)
+    }
   }
 }

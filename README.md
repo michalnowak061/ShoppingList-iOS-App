@@ -22,9 +22,20 @@
 
 ## General info
 
-Simple shopping list iOS app to learn Realme.
+Simple shopping list iOS app to learn Realm.
 
 ## Functionality
+- creating and removing new shopping lists
+- searching shopping lists by keyword (NSPredicate with format: CONTAINS)
+- shopping lists stores items to buy
+
+<p align="center"> <img src="Screenshots/screenshot1.png"{:height="20%" width="20%"} />
+34
+		               <img src="Screenshots/screenshot2.png"{:height="20%" width="20%"} />
+35
+                   <img src="Screenshots/screenshot3.png"{:height="20%" width="20%"} />
+36
+                   <img src="Screenshots/screenshot4.png"{:height="20%" width="20%"} /> </p>
 
 ## How to build
 
@@ -35,9 +46,11 @@ pod install
 After installing dependencies, you can run the project(`ShoppingList.xcworkspace`).
 
 ## Demo
+<p align="center"> <img src="Screenshots/demo.gif" {:height="25%" width="25%"} /> </p>
 
 ## Sources
 - animated checkbox: https://github.com/swifty-iOS/RadioCheckboxButton
+- floating action button: https://github.com/jjochen/JJFloatingActionButton
 
 ## Contact
 <a href="https://www.linkedin.com/in/michał-nowak-53075a17a/"> <img src="https://i.imgur.com/Ba61VxB.png" width="40" height="40" /> </a>

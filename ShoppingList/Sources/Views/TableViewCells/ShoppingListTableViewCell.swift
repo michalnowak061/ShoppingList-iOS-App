@@ -2,12 +2,12 @@ import UIKit
 import MBCheckboxButton
 
 class ShoppingListTableViewCell: UITableViewCell {
-  // MARK: - Public variable's
-  public var id: Int?
+  // MARK: - Variable's
+  var id: Int?
 
-  public weak var delegate: ShoppingListTableViewCellDelegate?
+  weak var delegate: ShoppingListTableViewCellDelegate?
 
-  public var isChecked: Bool {
+  var isChecked: Bool {
     get {
       return self.checkbox.isOn
     }
@@ -16,7 +16,7 @@ class ShoppingListTableViewCell: UITableViewCell {
     }
   }
 
-  public var itemToBuyName: String? {
+  var itemToBuyName: String? {
     get {
       return self.label.text
     }
@@ -75,7 +75,7 @@ class ShoppingListTableViewCell: UITableViewCell {
         self.label.alpha = 0.5
       }
 
-      self.delegate?.didSelect(taskTableViewCell: self, didSelect: true)
+      self.delegate?.didSelect(taskTableViewCell: self)
     }
   }
 
@@ -86,7 +86,7 @@ class ShoppingListTableViewCell: UITableViewCell {
         self.label.alpha = 1.0
       }
 
-      self.delegate?.didDeselect(taskTableViewCell: self, didDeselect: true)
+      self.delegate?.didDeselect(taskTableViewCell: self)
     }
   }
 }

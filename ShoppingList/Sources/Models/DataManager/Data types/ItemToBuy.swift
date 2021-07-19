@@ -4,8 +4,12 @@ import RealmSwift
 class ItemToBuy: Object {
   @objc dynamic var name = ""
 
-  convenience init(name: String) {
+  @objc dynamic var isChecked = false
+
+  // periphery: ignore
+  convenience init(name: String, isChecked: Bool) {
     self.init()
     self.name = name
+    self.isChecked = isChecked
   }
 }

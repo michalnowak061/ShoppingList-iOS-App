@@ -1,7 +1,7 @@
 import Foundation
 
 protocol ShoppingListTableViewCellDelegate: AnyObject {
-  func didSelect(taskTableViewCell: ShoppingListTableViewCell, didSelect: Bool)
+  func didSelect(taskTableViewCell: ShoppingListTableViewCell)
 
-  func didDeselect(taskTableViewCell: ShoppingListTableViewCell, didDeselect: Bool)
+  func didDeselect(taskTableViewCell: ShoppingListTableViewCell)
 }

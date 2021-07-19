@@ -6,10 +6,6 @@ class DataManager {
 
   private(set) var entities: Results<ShoppingList>!
 
-  public var count: Int {
-    self.realm.objects(ShoppingList.self).count
-  }
-
   init?() {
     do {
       try self.realm = Realm()
@@ -24,6 +20,7 @@ class DataManager {
     }
   }
 
+  // periphery: ignore
   convenience init?(realm: Realm) {
     self.init()
     self.realm = realm
@@ -46,6 +43,13 @@ class DataManager {
   func read(completion: @escaping () -> Void = {}) {
     DispatchQueue.init(label: "read", qos: .background).sync {
       self.entities = self.realm.objects(ShoppingList.self)
+      completion()
+    }
+  }
+
+  func filter(predicate: NSPredicate, completion: @escaping () -> Void = {}) {
+    DispatchQueue.init(label: "filter", qos: .background).sync {
+      self.entities = self.realm.objects(ShoppingList.self).filter(predicate)
       completion()
     }
   }
@@ -80,6 +84,7 @@ class DataManager {
     }
   }
 
+  // periphery:ignore
   func deleteAll(completion: @escaping () -> Void = {}) throws {
     try DispatchQueue.init(label: "deleteAll", qos: .background).sync {
       do {

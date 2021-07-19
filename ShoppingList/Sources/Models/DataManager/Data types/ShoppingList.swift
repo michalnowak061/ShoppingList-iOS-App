@@ -6,6 +6,7 @@ class ShoppingList: Object {
 
   var items = List<ItemToBuy>()
 
+  // periphery:ignore
   convenience init(name: String, items: List<ItemToBuy>) {
     self.init()
     self.name = name

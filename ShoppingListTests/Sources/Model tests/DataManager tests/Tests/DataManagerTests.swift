@@ -27,20 +27,23 @@ class DataManagerTests: XCTestCase {
   }
 
   func testCreate() {
-    let count = self.sut.count
+    self.sut.read()
+    let count = self.sut.entities.count
     XCTAssertNoThrow(try self.sut.create(shoppingList: ShoppingList()))
-    XCTAssertEqual(self.sut.count, count + 1)
+    XCTAssertEqual(self.sut.entities.count, count + 1)
   }
 
   func testDeleteAll() {
+    self.sut.read()
     XCTAssertNoThrow(try self.sut.create(shoppingList: ShoppingList()))
     XCTAssertNoThrow(try self.sut.deleteAll())
-    XCTAssertEqual(self.sut.count, 0)
+    XCTAssertEqual(self.sut.entities.count, 0)
   }
 
   func testEmptyCount() {
+    self.sut.read()
     XCTAssertNoThrow(try self.sut.deleteAll())
-    XCTAssertEqual(self.sut.count, 0)
+    XCTAssertEqual(self.sut.entities.count, 0)
   }
 
   func testRead() {
@@ -52,6 +55,17 @@ class DataManagerTests: XCTestCase {
 
     self.sut.read {
       XCTAssertEqual(self.sut.entities[0].name, "List name")
+    }
+  }
+
+  func testFilter() {
+    XCTAssertNoThrow(try self.sut.create(shoppingList: ShoppingList(name: "list 1", items: .init())))
+    XCTAssertNoThrow(try self.sut.create(shoppingList: ShoppingList(name: "list 2", items: .init())))
+    XCTAssertNoThrow(try self.sut.create(shoppingList: ShoppingList(name: "list 3", items: .init())))
+    XCTAssertNoThrow(try self.sut.create(shoppingList: ShoppingList(name: "list 4", items: .init())))
+
+    self.sut.filter(predicate: NSPredicate(format: "name = %@", "list 1")) {
+      XCTAssertEqual(self.sut.entities.count, 1)
     }
   }
 
@@ -75,9 +89,10 @@ class DataManagerTests: XCTestCase {
   }
 
   func testDelete() {
+    self.sut.read()
     XCTAssertNoThrow(try self.sut.create(shoppingList: ShoppingList()))
     XCTAssertNoThrow(try self.sut.delete(atIndex: 0))
-    XCTAssertEqual(self.sut.count, 0)
+    XCTAssertEqual(self.sut.entities.count, 0)
   }
 
   func getTest() {

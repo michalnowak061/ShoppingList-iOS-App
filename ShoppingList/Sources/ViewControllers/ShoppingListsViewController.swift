@@ -21,11 +21,6 @@ class ShoppingListsViewController: UIViewController {
     self.dataManager = DataManager()
   }
 
-  convenience init(dataManager: DataManager) {
-    self.init()
-    self.dataManager = dataManager
-  }
-
   required init?(coder: NSCoder) {
     super.init(coder: coder)
     self.dataManager = DataManager()
@@ -98,6 +93,7 @@ class ShoppingListsViewController: UIViewController {
 
   private func searchBarSetup() {
     self.searchbar = UISearchBar()
+    self.searchbar.delegate = self
     self.searchbar.translatesAutoresizingMaskIntoConstraints = false
     self.searchbar.alpha = 0
 
@@ -170,7 +166,7 @@ class ShoppingListsViewController: UIViewController {
 
 extension ShoppingListsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    self.dataManager.count
+    self.dataManager.entities.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -210,5 +206,21 @@ extension ShoppingListsViewController: UITableViewDelegate, UITableViewDataSourc
     }
 
     return UISwipeActionsConfiguration(actions: [action])
+  }
+
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    self.view.endEditing(true)
+  }
+}
+
+extension ShoppingListsViewController: UISearchBarDelegate {
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchText.isEmpty {
+      self.updateUI()
+    } else {
+      self.dataManager.filter(predicate: NSPredicate(format: "name CONTAINS %@", searchText)) {
+        self.tableView.reloadData()
+      }
+    }
   }
 }
