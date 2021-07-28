@@ -30,12 +30,9 @@ Simple shopping list iOS app to learn Realm.
 - shopping lists stores items to buy
 
 <p align="center"> <img src="Screenshots/screenshot1.png"{:height="20%" width="20%"} />
-34
-		               <img src="Screenshots/screenshot2.png"{:height="20%" width="20%"} />
-35
-                   <img src="Screenshots/screenshot3.png"{:height="20%" width="20%"} />
-36
-                   <img src="Screenshots/screenshot4.png"{:height="20%" width="20%"} /> </p>
+		   <img src="Screenshots/screenshot2.png"{:height="20%" width="20%"} />
+		   <img src="Screenshots/screenshot3.png"{:height="20%" width="20%"} />
+		   <img src="Screenshots/screenshot4.png"{:height="20%" width="20%"} /> </p>
 
 ## How to build
 
