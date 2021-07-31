@@ -334,11 +334,11 @@
 			buildConfigurationList = 9DF9B8CE2698F8DF00D1CAF1 /* Build configuration list for PBXNativeTarget "ShoppingList" */;
 			buildPhases = (
 				C674BC1733FFB186886EFB2C /* [CP] Check Pods Manifest.lock */,
+				9DF9B8D72699010100D1CAF1 /* Run SwiftLint */,
 				9DF9B8A02698F8DA00D1CAF1 /* Sources */,
 				9DF9B8A12698F8DA00D1CAF1 /* Frameworks */,
 				9DF9B8A22698F8DA00D1CAF1 /* Resources */,
 				7A7FD1AA88585BC1C4E4A3E1 /* [CP] Embed Pods Frameworks */,
-				9DF9B8D72699010100D1CAF1 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -486,7 +486,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 		9DF9B8DE2699041C00D1CAF1 /* Run Periphery */ = {
 			isa = PBXShellScriptBuildPhase;
